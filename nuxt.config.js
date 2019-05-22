@@ -42,9 +42,19 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
+    '@nuxtjs/vuetify',
     '@nuxtjs/pwa'
   ],
+
+  vuetify: {
+    // Vuetify の設定はここに書く
+    theme: {
+      primary: '#3f51b5',
+      secondary: '#b0bec5',
+      accent: '#8c9eff',
+      error: '#b71c1c'
+    }
+  },
   /*
   ** Axios module configuration
   */
