@@ -43,8 +43,30 @@ export default {
     '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
     '@nuxtjs/vuetify',
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/markdownit',
+
+    '~/modules/splitExt'
   ],
+
+  markdownit: {
+    preset: 'default',
+    linkify: false,
+    breaks: true,
+    html: true,
+    typegraphy: true,
+    injected: true,
+    htmlOut: true,
+    langPrefix: 'language-',
+    use: [
+      'markdown-it-meta',
+      'markdown-it-highlightjs',
+      'markdown-it-table-of-contents',
+      'markdown-it-footnote',
+      'markdown-it-mark',
+      'markdown-it-video'
+    ]
+  },
 
   vuetify: {
     // Vuetify の設定はここに書く

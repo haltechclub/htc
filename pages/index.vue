@@ -1,22 +1,19 @@
-<template lang="pug">
-  div
-    header-bar
-    section.container
-      div
-        logo
-        .links
-          a(
-            href="https://nuxtjs.org/"
-            target="_blank"
-            class="button--green"
-          )
-            | Documentation
-          a(
-            href="https://github.com/nuxt/nuxt.js"
-            target="_blank"
-            class="button--grey"
-          )
-            | GitHub
+<template>
+  <div>
+    <header-bar />
+    <section class="container">
+      <div>
+        <logo></logo>
+        <div class="links">
+          <a href="https://nuxtjs.org/" target="_blank" class="button--green">Cannpus</a>
+          <a href="https://github.com/Tim0401" target="_blank" class="button--grey">GitHub</a>
+        </div>
+      </div>
+    </section>
+    <section class="container">
+      <div v-html=$md.render(purpose.bodyContent)></div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -29,6 +26,14 @@ export default {
   components: {
     Logo,
     HeaderBar
+  },
+  async asyncData() {
+    const purpose = await import(`~/contents/json/purpose.json`)
+    const summary = await import(`~/contents/summary.json`)
+    return {
+      purpose: purpose,
+      summary: summary.fileMap
+    }
   }
 }
 </script>

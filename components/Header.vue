@@ -1,24 +1,57 @@
-<template lang="pug">
-  div
-    v-navigation-drawer(v-model="drawer" app fixed disable-resize-watcher dark)
-      v-list(dense)
-        img.logo(:src="require('@/assets/htc-dark.svg')" height="56rem")
-        v-list-tile(@click="")
-          v-list-tile-action
-            v-icon dashboard
-          v-list-tile-content
-            v-list-tile-title TOP
-        v-subheader category
-    v-toolbar(dark)
-      v-toolbar-side-icon(@click.stop="drawer = !drawer")
-        v-icon code
-      v-toolbar-title.headline
-        img(:src="require('@/assets/htc-dark.svg')" height="56rem")
-      v-spacer
-      v-toolbar-items
-        v-btn(flat)
-          v-icon fab fa-github
+<template>
+  <div>
+    <v-navigation-drawer
+      v-model="drawer"
+      app="app"
+      fixed="fixed"
+      disable-resize-watcher="disable-resize-watcher"
+      dark="dark">
+      <v-list dense="dense">
+        <img class="logo" :src="require('@/assets/htc-dark.svg')" height="56rem"/>
+        <nuxt-link to="/">
+          <v-list-tile @click="onClick">
+            <v-list-tile-action>
+              <v-icon>dashboard</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              <v-list-tile-title>TOP</v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </nuxt-link>
+        <v-subheader>category</v-subheader>
+        <div v-for="category in categories" :key="category">
+          <nuxt-link :to="`/categories/${ category }`">
+            <v-list-tile @click="onClick">
+              <v-list-tile-action>
+                <v-icon>dashboard</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ category }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </nuxt-link>
+        </div>
+      </v-list>
+    </v-navigation-drawer>
+    <v-toolbar dark="dark">
+      <v-toolbar-side-icon @click.stop="drawer = !drawer">
+        <v-icon>code</v-icon>
+      </v-toolbar-side-icon>
+      <nuxt-link to="/">
+        <v-toolbar-title class="headline">
+          <img :src="require('@/assets/htc-dark.svg')" height="56rem"/>
+        </v-toolbar-title>
+      </nuxt-link>
+      <v-spacer></v-spacer>
+      <v-toolbar-items>
+        <v-btn flat="flat">
+          <v-icon>fab fa-github</v-icon>
+        </v-btn>
+      </v-toolbar-items>
+    </v-toolbar>
+  </div>
 </template>
+
 <style>
   .logo {
     margin: 1rem auto;
@@ -28,12 +61,27 @@
     text-align: center;
   }
 
+  a {
+    color: white;
+    text-decoration: none;
+  }
+
 </style>
 
 <script>
 export default {
-  data: () => ({
-    drawer: null
-  })
+  data() {
+    const summary = require(`~/contents/summary.json`).fileMap
+    let categories = Object.keys(summary).map(key => summary[key].category)
+    categories = Array.from(new Set(categories))
+    return {
+      drawer: null,
+      categories: categories
+    }
+  },
+  methods: {
+    onClick: function () {
+    }
+  }
 }
 </script>
