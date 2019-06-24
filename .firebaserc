@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "default": "hal-tech-club",
+    "develop": "hal-tech-club"
+  }
+}
