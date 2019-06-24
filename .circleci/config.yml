@@ -8,6 +8,12 @@ jobs:
       - run: # 順に実行したいコマンドとコマンドに名前をつけます
           name: yarn install
           command: yarn install
+      - run:   
+          name: Install Firebase-tools
+          command: yarn add --dev firebase-tools
+      - run:   
+          name: Install processmd
+          command: yarn add --dev processmd
       - run:
           name: md to json
           command: processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
@@ -26,6 +32,12 @@ jobs:
       - run: # 順に実行したいコマンドとコマンドに名前をつけます
           name: yarn install
           command: yarn install
+      - run:   
+          name: Install Firebase-tools
+          command: yarn add --dev firebase-tools
+      - run:   
+          name: Install processmd
+          command: yarn add --dev processmd
       - run:
           name: md to json
           command: processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
