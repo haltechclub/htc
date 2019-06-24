@@ -98,9 +98,6 @@ export default {
     */
     quiet: false,
     extend(config, ctx) {
-      if (!ctx.isDev) {
-        config.output.publicPath = '_nuxt/'
-      }
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
@@ -130,15 +127,6 @@ export default {
         routes.push(`articles/${splitExt(item)[0]}`)
       })
       return routes
-    }
-  },
-  router: {
-    extendRoutes(routes, resolve) {
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/index.vue')
-      })
     }
   }
 }
