@@ -7,18 +7,24 @@ executors:
 
 commands:
   build_app:
-    steps: 
+    steps:
+      - restore_cache:
+          keys:
+            # lock ファイルが変更されると、より広範囲にマッチする 2 番目以降のパターンがキャッシュの復元に使われます
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-v1-
       - run:
           name: yarn install
           command: yarn install
-      - run:   
+      - run:
           name: Install Firebase-tools
           command: yarn global add firebase-tools
-      - run:   
+      - run:
           name: Install processmd
           command: yarn global add processmd --dev
       - run:
-          name: delete json 
+          name: delete json
           command: rm -rf contents/summary.json; rm -rf contents/json/*
       - run:
           name: md to json
@@ -26,6 +32,10 @@ commands:
       - run:
           name: build
           command: yarn nuxt generate
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
       - run:
           name: use Firebase Hosting
           command: yarn firebase use default
@@ -69,4 +79,4 @@ workflows:
           filters:
             branches:
               only: develop # developブランチのみを実行対象とします
-  
+

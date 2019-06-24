@@ -96,6 +96,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    quiet: false,
     extend(config, ctx) {
       if (!ctx.isDev) {
         config.output.publicPath = '_nuxt/'
