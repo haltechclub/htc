@@ -13,19 +13,19 @@ jobs:
           command: yarn global add firebase-tools
       - run:   
           name: Install processmd
-          command: yarn global add processmd
+          command: yarn global add processmd --dev
       - run:
           name: delete json 
           command: rm -rf contents/summary.json; rm -rf contents/json/*
       - run:
           name: md to json
-          command: processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
+          command: yarn processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
       - run:
           name: build
           command: yarn nuxt generate
       - run:
           name: deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase deploy production hal-tech-club --project "$FIREBASE_PROJECT_ID" --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+          command: yarn firebase deploy production hal-tech-club --project "$FIREBASE_PROJECT_ID" --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
 
   deploy_dev: # ジョブ名
     docker:
@@ -40,19 +40,19 @@ jobs:
           command: yarn global add firebase-tools
       - run:   
           name: Install processmd
-          command: yarn global add processmd
+          command: yarn global add processmd --dev
       - run:
           name: delete json 
           command: rm -rf contents/summary.json; rm -rf contents/json/*
       - run:
           name: md to json
-          command: processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
+          command: yarn processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
       - run:
           name: build
           command: yarn nuxt generate
       - run:
           name: deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase deploy develop develop-hal-tech-club --project "$FIREBASE_PROJECT_ID" --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+          command: yarn firebase deploy develop develop-hal-tech-club --project "$FIREBASE_PROJECT_ID" --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
 
 workflows:
   version: 2
