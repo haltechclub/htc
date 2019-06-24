@@ -19,7 +19,7 @@ jobs:
           command: rm -rf contents/summary.json; rm -rf contents/json/*
       - run:
           name: md to json
-          command: yarn processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
+          command: yarn -s processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
       - run:
           name: build
           command: yarn nuxt generate
@@ -46,7 +46,7 @@ jobs:
           command: rm -rf contents/summary.json; rm -rf contents/json/*
       - run:
           name: md to json
-          command: yarn processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
+          command: yarn -s processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
       - run:
           name: build
           command: yarn nuxt generate
