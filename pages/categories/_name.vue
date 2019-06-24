@@ -1,21 +1,57 @@
 <template>
   <div>
     <header-bar />
-    <div v-for="(article, index) in articles" :key="index">
-      <v-layout mt-3 mb-3>
-        <v-flex xs12 sm10 offset-sm1>
+    <v-layout mt-5 />
+    <v-content>
+      <v-layout
+        v-for="(article, index) in articles"
+        :key="index"
+        justify-center
+        align-center
+        mt-3
+        mb-3>
+        <v-flex xs12 sm10 md8>
           <v-card>
             <v-img
-              :src="require('@/assets/contents/' + article.thumbnail)"
+              :src="article.thumbnail"
               aspect-ratio="2.75"
             ></v-img>
 
             <v-card-title primary-title>
               <div>
                 <h3 class="headline mb-0">{{ article.title }}</h3>
-                <div> {{ article.description }} </div>
+                <div> {{ article.description }}</div>
               </div>
             </v-card-title>
+
+            <v-list class="dark-theme" dark dense>
+              <v-list-tile @click="onClick">
+                <v-list-tile-action>
+                  <v-icon>updated</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ article.updated_at }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+              <nuxt-link :to="`/categories/${ article.category }`">
+                <v-list-tile @click="onClick">
+                  <v-list-tile-action>
+                    <v-icon>category</v-icon>
+                  </v-list-tile-action>
+                  <v-list-tile-content>
+                    <v-list-tile-title>{{ article.category }}</v-list-tile-title>
+                  </v-list-tile-content>
+                </v-list-tile>
+              </nuxt-link>
+              <v-list-tile @click="onClick">
+                <v-list-tile-action>
+                  <v-icon>tag</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                  <v-list-tile-title>{{ article.tags }}</v-list-tile-title>
+                </v-list-tile-content>
+              </v-list-tile>
+            </v-list>
 
             <v-card-actions>
               <v-btn flat color="orange">Share</v-btn>
@@ -26,7 +62,7 @@
           </v-card>
         </v-flex>
       </v-layout>
-    </div>
+    </v-content>
   </div>
 </template>
 
@@ -48,10 +84,13 @@ export default {
       if (summary[key].category === params.name) {
         summary[key].path = splitExt(summary[key].base)[0]
         if (!summary[key].thumbnail) {
-          summary[key].thumbnail = 'default.svg'
+          summary[key].thumbnail = require('@/assets/contents/default.svg')
         }
         articles.push(summary[key])
       }
+    })
+    articles.sort(function (a, b) {
+      return (a.updated_at > b.updated_at) ? -1 : 1
     })
     return {
       articles: articles
@@ -61,16 +100,16 @@ export default {
 </script>
 
 <style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
+  .container {
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 
-.links {
-  padding-top: 15px;
-}
+  .links {
+    padding-top: 15px;
+  }
 </style>

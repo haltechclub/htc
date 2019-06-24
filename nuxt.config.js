@@ -1,4 +1,6 @@
 import pkg from './package'
+import articleList from './contents/summary.json'
+import splitExt from './modules/splitExt'
 
 export default {
   mode: 'spa',
@@ -8,6 +10,9 @@ export default {
   */
   head: {
     title: pkg.name,
+    htmlAttrs: {
+      lang: 'ja'
+    },
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -27,6 +32,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/style.scss',
   ],
 
   /*
@@ -91,6 +97,8 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    extractCSS: true,
+    quiet: false,
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
@@ -101,6 +109,26 @@ export default {
           exclude: /(node_modules)/
         })
       }
+    }
+  },
+  generate: {
+    routes() {
+      const routes = []
+
+      // カテゴリ
+      const summary = articleList.fileMap
+      let categories = Object.keys(summary).map(key => summary[key].category)
+      categories = Array.from(new Set(categories))
+      categories.map((item) => {
+        routes.push(`categories/${item}`)
+      })
+
+      // 記事
+      const articles = Object.keys(summary).map(key => summary[key].base)
+      articles.map((item) => {
+        routes.push(`articles/${splitExt(item)[0]}`)
+      })
+      return routes
     }
   }
 }

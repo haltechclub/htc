@@ -1,0 +1,82 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/node:8.11.4
+
+commands:
+  build_app:
+    steps:
+      - restore_cache:
+          keys:
+            # lock ファイルが変更されると、より広範囲にマッチする 2 番目以降のパターンがキャッシュの復元に使われます
+            - yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+            - yarn-packages-v1-{{ .Branch }}-
+            - yarn-packages-v1-
+      - run:
+          name: yarn install
+          command: yarn install
+      - run:
+          name: Install Firebase-tools
+          command: yarn global add firebase-tools
+      - run:
+          name: Install processmd
+          command: yarn global add processmd --dev
+      - run:
+          name: delete json
+          command: rm -rf contents/summary.json; rm -rf contents/json/*
+      - run:
+          name: md to json
+          command: yarn -s processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
+      - run:
+          name: build
+          command: yarn nuxt generate
+      - save_cache:
+          paths:
+            - ~/.cache/yarn
+          key: yarn-packages-v1-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run:
+          name: use Firebase Hosting
+          command: yarn firebase use default
+      - run:
+          name: target apply Firebase Hosting
+          command: yarn firebase target:apply hosting production hal-tech-club
+      - run:
+          name: target apply Firebase Hosting
+          command: yarn firebase target:apply hosting develop develop-hal-tech-club
+
+jobs:
+  deploy_production: # ジョブ名
+    executor:
+      name: default
+    steps:
+      - checkout # ソースコードのチェックアウト
+      - build_app
+      - run:
+          name: deploy to Firebase Hosting
+          command: yarn firebase deploy --only hosting:production --project=$FIREBASE_PROJECT_ID --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+
+  deploy_develop: # ジョブ名
+    executor:
+      name: default
+    steps:
+      - checkout # ソースコードのチェックアウト
+      - build_app
+      - run:
+          name: deploy to Firebase Hosting
+          command: yarn firebase deploy --only hosting:develop --project=$FIREBASE_PROJECT_ID --token=$FIREBASE_TOKEN # プロジェクト上のfirebase-toolsでデプロイします
+
+workflows:
+  version: 2
+  deploy: # ワークフローの名前
+    jobs:
+      - deploy_production: # 上で定義したジョブを指定します
+          filters:
+            branches:
+              only: master # masterブランチのみを実行対象とします
+      - deploy_develop: # 上で定義したジョブを指定します
+          filters:
+            branches:
+              only: develop # developブランチのみを実行対象とします
+
