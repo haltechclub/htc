@@ -1,7 +1,5 @@
 {
   "projects": {
-    "default": "hal-tech-club",
-    "develop": "hal-tech-club",
-    "production": "hal-tech-club"
+    "default": "hal-tech-club"
   }
 }

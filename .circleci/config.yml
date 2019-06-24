@@ -27,6 +27,9 @@ commands:
           name: build
           command: yarn nuxt generate
       - run:
+          name: use Firebase Hosting
+          command: yarn firebase use default
+      - run:
           name: target apply Firebase Hosting
           command: yarn firebase target:apply hosting production hal-tech-club
       - run:
