@@ -1,12 +1,12 @@
 ---
 title: 活動趣旨
-description: 活動趣旨
+description: HAL Tech Clubの活動趣旨について
 author: 村田 司
 tags: 
 category: その他
 thumbnail:
-created_at: "2019-02-16 00:08:00"
-updated_at: "2019-02-16 00:00:00"
+created_at: "2019-02-16"
+updated_at: "2019-02-16"
 ---
 
 ## 活動趣旨

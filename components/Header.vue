@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <div class="dark-theme">
     <v-navigation-drawer
       v-model="drawer"
-      app="app"
-      fixed="fixed"
-      disable-resize-watcher="disable-resize-watcher"
-      dark="dark">
-      <v-list dense="dense">
+      app
+      fixed
+      dark
+      hide-overlay>
+      <v-list dense>
         <img class="logo" :src="require('@/assets/htc-dark.svg')" height="56rem"/>
         <nuxt-link to="/">
           <v-list-tile @click="onClick">
@@ -33,7 +33,7 @@
         </div>
       </v-list>
     </v-navigation-drawer>
-    <v-toolbar dark="dark">
+    <v-toolbar dark dense fixed>
       <v-toolbar-side-icon @click.stop="drawer = !drawer">
         <v-icon>code</v-icon>
       </v-toolbar-side-icon>
@@ -44,7 +44,7 @@
       </nuxt-link>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat="flat">
+        <v-btn flat="flat" href="https://github.com/orgs/haltechclub" target="_blank">
           <v-icon>fab fa-github</v-icon>
         </v-btn>
       </v-toolbar-items>
@@ -61,11 +61,6 @@
     text-align: center;
   }
 
-  a {
-    color: white;
-    text-decoration: none;
-  }
-
 </style>
 
 <script>
@@ -74,6 +69,7 @@ export default {
     const summary = require(`~/contents/summary.json`).fileMap
     let categories = Object.keys(summary).map(key => summary[key].category)
     categories = Array.from(new Set(categories))
+    categories.sort()
     return {
       drawer: null,
       categories: categories

@@ -4,6 +4,21 @@
   </div>
 </template>
 
+<script>
+
+export default {
+  mounted: () => {
+    const links = document.links
+    for (let i = 0, linksLength = links.length; i < linksLength; i++) {
+      if (links[i].hostname !== window.location.hostname) {
+        links[i].target = '_blank'
+      }
+    }
+  }
+}
+
+</script>
+
 <style>
 html {
   font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',

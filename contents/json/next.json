@@ -1,0 +1,18 @@
+{
+  "title": "次回活動",
+  "description": "【TOP表示】次回活動について",
+  "author": "村田 司",
+  "tags": null,
+  "category": "その他",
+  "thumbnail": null,
+  "created_at": "2019-06-14",
+  "updated_at": "2019-06-14",
+  "bodyContent": "## 次回活動\n\n第２回 LT大会\n「２年生に向けて伝えたいこと vol.2」\n\n## スケジュール\n\n日程：６月14日（金）\n時間：18:30 ～ 未定\n場所：１６３教室\n参加要件：↓こちらをクリック！\n\n[connpass](https://haltechclub.connpass.com/event/135109/)\n\n※急遽参加も大募集！！！",
+  "bodyHtml": "<h2>次回活動</h2>\n<p>第２回 LT大会\n「２年生に向けて伝えたいこと vol.2」</p>\n<h2>スケジュール</h2>\n<p>日程：６月14日（金）\n時間：18:30 ～ 未定\n場所：１６３教室\n参加要件：↓こちらをクリック！</p>\n<p><a href=\"https://haltechclub.connpass.com/event/135109/\">connpass</a></p>\n<p>※急遽参加も大募集！！！</p>\n",
+  "preview": "次回活動\n\n第２回 LT大会\n「２年生に向けて伝えたいこと vol.2」\n\nスケジュール\n\n日程：６月14日（金）\n時間：18:30 ～ 未定\n場所：１６３教室\n参加要件：↓こちらをクリック！\n\nconnpass\n\n※急遽参加も大募集！！！",
+  "dir": "contents/json",
+  "base": "next.json",
+  "ext": ".json",
+  "sourceBase": "next.md",
+  "sourceExt": ".md"
+}

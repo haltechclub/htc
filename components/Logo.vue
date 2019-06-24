@@ -4,7 +4,7 @@
       v-img(:src="require('@/assets/htc.svg')")
     div
       h2.subtitle
-        | hal tech club website
+        | HAL Tech Club website
 </template>
 
 <style>

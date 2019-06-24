@@ -20,8 +20,3 @@ $ yarn run generate
 ```
 
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
-
-
-```bash
-processmd "contents/markdown/**/*.md" --preview 160 --stdout --outputDir contents/json > contents/summary.json
-```

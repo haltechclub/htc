@@ -32,6 +32,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/css/style.scss',
   ],
 
   /*
@@ -96,6 +97,7 @@ export default {
     /*
     ** You can extend webpack config here
     */
+    extractCSS: true,
     quiet: false,
     extend(config, ctx) {
       // Run ESLint on save
