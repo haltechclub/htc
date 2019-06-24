@@ -1,6 +1,7 @@
 ---
 title: 活動趣旨
 description: 活動趣旨
+author: 村田 司
 tags: 
 category: その他
 thumbnail:

@@ -1,6 +1,7 @@
 ---
 title: 2019/06/07 第1回アイデアソン
 description: 「お題：お寿司 × IoT」 
+author: 村田 司
 tags: 
 category: Ideathon
 thumbnail: 2019-6-7-ideathon.png
