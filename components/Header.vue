@@ -5,9 +5,10 @@
       app
       fixed
       dark
-      hide-overlay>
+      hide-overlay
+    >
       <v-list dense>
-        <img class="logo" :src="require('@/assets/htc-dark.svg')" height="56rem"/>
+        <img class="logo" :src="require('@/assets/htc-dark.svg')" height="56rem" alt="">
         <nuxt-link to="/">
           <v-list-tile @click="onClick">
             <v-list-tile-action>
