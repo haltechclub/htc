@@ -72,6 +72,7 @@
               <v-flex lg12 md12 xs12>
                 <div style="text-align: center; margin-top: 1rem">
                   <v-chip
+                    v-if="tagItem[0]"
                     class="ma-2"
                     color="indigo"
                     text-color="white"
@@ -84,6 +85,7 @@
                     {{ tagItem[0] }}
                   </v-chip>
                   <v-chip
+                    v-if="tagItem[1]"
                     class="ma-2"
                     color="orange"
                     text-color="white"
@@ -96,6 +98,7 @@
                     {{ tagItem[1] }}
                   </v-chip>
                   <v-chip
+                    v-if="tagItem[2]"
                     class="ma-2"
                     color="teal"
                     text-color="white"
