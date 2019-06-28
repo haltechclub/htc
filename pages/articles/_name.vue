@@ -112,7 +112,7 @@
                   </v-chip>
                 </div>
               </v-flex>
-              <div id="content"></div>
+              <article id="content" class="markdown-body"></article>
             </v-layout>
           </v-card>
         </v-flex>
@@ -167,6 +167,19 @@ export default {
   }
 
   #content /deep/ {
+    .markdown-body {
+      box-sizing: border-box;
+      min-width: 200px;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 45px;
+    }
+
+    @media (max-width: 767px) {
+      .markdown-body {
+        padding: 15px;
+      }
+    }
     font-size: 1.15rem;
     .iframe-container {
       margin: 1rem;
