@@ -140,7 +140,8 @@ export default {
   },
   mounted: function () {
     const tag = this.article.bodyHtml
-    const doc = new DOMParser().parseFromString(tag, 'text/html')
+    const tagContent = this.htmlDecodeByRegExp(tag)
+    const doc = new DOMParser().parseFromString(tagContent, 'text/html')
     const tagItem = doc.getElementsByTagName('h2')[0].nextElementSibling.innerHTML
     const ItemArray = tagItem.split('<br>')
     this.tagItem = ItemArray
@@ -148,6 +149,16 @@ export default {
     doc.getElementsByTagName('body')[0].removeChild(doc.getElementsByTagName('h2')[0])
     this.content = doc.getElementsByTagName('body')[0]
     document.getElementById('content').innerHTML = this.content.innerHTML
+  },
+  methods: {
+    // markdownにhtml書いたら、html文を解析
+    htmlDecodeByRegExp: function (str) {
+      let result
+      if (str.length === 0) return ''
+      // eslint-disable-next-line no-useless-escape,prefer-const
+      result = str.replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&nbsp;/g, ' ').replace(/&#39;/g, "\'").replace(/&quot;/g, '"')
+      return result
+    }
   }
 }
 </script>
