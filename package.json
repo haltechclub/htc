@@ -35,7 +35,7 @@
     "markdown-it-table-of-contents": "^0.4.4",
     "markdown-it-video": "^0.6.3",
     "node-sass": "^4.12.0",
-    "nuxt": "^2.4.0",
+    "nuxt": "^2.15.8",
     "sass-loader": "^7.1.0"
   },
   "devDependencies": {
@@ -61,6 +61,6 @@
     "processmd": "^4.4.2",
     "pug": "2.0.3",
     "pug-plain-loader": "^1.0.0",
-    "vue-jest": "^3.0.3"
+    "vue-jest": "^4.0.1"
   }
 }
